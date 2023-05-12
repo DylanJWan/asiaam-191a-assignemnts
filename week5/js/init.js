@@ -36,3 +36,14 @@ function loadData(){
 
 const localGeojson = "map.geojson"
 loadData(localGeojson)
+
+
+/*
+results.data.forEach(record=>
+    addMarker(record.lat,record.lng)
+    
+    
+    )
+    
+    
+    */
