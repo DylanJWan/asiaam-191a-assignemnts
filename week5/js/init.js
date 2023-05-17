@@ -15,35 +15,26 @@ function addMarker(lat,lng,title,message){
     return message
 }
 
+const dataUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTnUmjW9rOZKEBOyNYp9ePgPpuKpiPy0PuDrVTYXkLVxSB3pAbllllekUsot5FLBFcMLzs9s6Hn3MFt/pub?output=csv"
 
 
-function loadData(){
-    fetch("map.geojson")
-    .then(response => {
-        return response.json()
-    })
-    .then(data =>{
-        // Basic Leaflet method to add GeoJSON data
-        L.geoJSON(data, {
-                pointToLayer: (feature, latlng) => { 
-                    return L.circleMarker(latlng, {color: feature.properties.color})
-                }
-            }).bindPopup(layer => {
-                return layer.feature.properties.place;
-            }).addTo(map);
+
+function loadData(url){
+    Papa.parse(url, {
+        header: true,
+        download: true,
+        complete: results => processData(results)
     })
 }
 
-const localGeojson = "map.geojson"
-loadData(localGeojson)
+function processData(results){
+    console.log(results)
+    results.data.forEach(data => {
+        console.log(data)
+        addMarker(data.lat,data.lng,data['Where did you get vaccinated?'],data['Have you been vaccinated?'])
+    })
+}
 
 
-/*
-results.data.forEach(record=>
-    addMarker(record.lat,record.lng)
-    
-    
-    )
-    
-    
-    */
+// this is how we use our function
+loadData(dataUrl)
