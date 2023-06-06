@@ -8,12 +8,18 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-// create a function to add markers
 function addMarker(data){
-    // console.log(data['Where did you get vaccinated?'])
-    L.marker([data.lat,data.lng]).addTo(map).bindPopup(`<h2>${data['Where do you get your favorite food?']}</h2> <h3>${data['What is your favorite food?']}</h3>`)
-    createButtons(data.lat,data.lng,data['Where do you get your favorite food?'])
-    return data['Where do you get your favorite food?']
+    // console.log(data)
+    // these are the names of our lat/long fields in the google sheets:
+    if (data['Have you ever been vaccinated?']=='Yes'){
+        L.marker([data.lat,data.lng]).addTo(map).bindPopup(`<h2>${data['Where did you get vaccinated?']}</h2> <h3>${data['Have you been vaccinated?']}</h3>`)
+        createButtons(data.lat,data.lng,data['Where did you get vaccinated?'])
+    }
+    else{
+        L.marker([mapOption]).addTo(map).bindPopup(`<h2>Not vaccinated</h2>`)
+    }
+   
+    return data
 }
 
 function createButtons(lat,lng,title){
@@ -28,8 +34,6 @@ function createButtons(lat,lng,title){
     const spaceForButtons = document.getElementById('placeForButtons')
     spaceForButtons.appendChild(newButton);//this adds the button to our page.
 }
-
-
 
 const dataUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSNq8_prhrSwK3CnY2pPptqMyGvc23Ckc5MCuGMMKljW-dDy6yq6j7XAT4m6GG69CISbD6kfBF0-ypS/pub?output=csv"
 

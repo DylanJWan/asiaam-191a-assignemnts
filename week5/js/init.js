@@ -15,7 +15,7 @@ function addMarker(lat,lng,title,message){
     return message
 }
 
-const dataUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTnUmjW9rOZKEBOyNYp9ePgPpuKpiPy0PuDrVTYXkLVxSB3pAbllllekUsot5FLBFcMLzs9s6Hn3MFt/pub?output=csv"
+const dataUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vREsl43pqYd6dQnZ2b8x3A8EhaIquh-CEfBDFRGBBr_GdekxXspfP2HO50cJE0QVXmCiqd_cIxHeT9a/pub?output=csv"
 
 
 
@@ -31,7 +31,7 @@ function processData(results){
     console.log(results)
     results.data.forEach(data => {
         console.log(data)
-        addMarker(data.lat,data.lng,data['Where did you get vaccinated?'],data['Have you been vaccinated?'])
+        addMarker(data.lat,data.lng,data['how would you describe the flavor'],data['Have you been vaccinated?'])
     })
 }
 
