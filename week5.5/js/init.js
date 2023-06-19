@@ -15,6 +15,8 @@ function addMarker(lat,lng,title,message){
     return message
 }
 
+
+
 // fetch("map.geojson")
 //     .then(response => {
 //         return response.json()
@@ -40,8 +42,10 @@ function loadData(url){
                 download: true,
                 complete: function(results) {
                     console.log(results)
+                    addMarker(results.lat, results.lng, results["What is the restaurant called?"],results["What is your favorite dish?"])
                 }
             })
         }
 
 loadData(dataUrl)
+
